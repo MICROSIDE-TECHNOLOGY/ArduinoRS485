@@ -50,12 +50,12 @@ void RS485Class::begin(unsigned long baudrate, int predelay, int postdelay)
   begin(baudrate, SERIAL_8N1, predelay, postdelay);
 }
 
-void RS485Class::begin(unsigned long baudrate, uint16_t config)
+void RS485Class::begin(unsigned long baudrate, rs485_serial_config_t config)
 {
   begin(baudrate, config, RS485_DEFAULT_PRE_DELAY, RS485_DEFAULT_POST_DELAY);
 }
 
-void RS485Class::begin(unsigned long baudrate, uint16_t config, int predelay, int postdelay)
+void RS485Class::begin(unsigned long baudrate, rs485_serial_config_t config, int predelay, int postdelay)
 {
   _baudrate = baudrate;
   _config = config;
@@ -205,6 +205,6 @@ void RS485Class::setDelays(int predelay, int postdelay)
 
 #ifdef RS485_SERIAL_PORT
 RS485Class RS485(RS485_SERIAL_PORT, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
-#else
+#elif defined(SERIAL_PORT_HARDWARE)
 RS485Class RS485(SERIAL_PORT_HARDWARE, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
 #endif
